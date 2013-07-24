@@ -18,17 +18,26 @@
 package sk.vx.connectbot;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONStringer;
+import org.json.JSONTokener;
 
 import sk.vx.connectbot.util.Colors;
+import sk.vx.connectbot.util.FileChooser;
+import sk.vx.connectbot.util.FileChooserCallback;
 import sk.vx.connectbot.util.HostDatabase;
 import sk.vx.connectbot.util.UberColorPickerDialog;
 import sk.vx.connectbot.util.UberColorPickerDialog.OnColorChangedListener;
@@ -36,8 +45,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -59,7 +70,9 @@ import android.widget.Toast;
  * @author Kenny Root
  *
  */
-public class ColorsActivity extends Activity implements OnItemClickListener, OnColorChangedListener, OnItemSelectedListener {
+public class ColorsActivity extends Activity implements OnItemClickListener, OnColorChangedListener, OnItemSelectedListener, FileChooserCallback {
+    public final static String TAG = "ConnectBot.ColorsActivity";
+
 	private GridView mColorGrid;
 	private Spinner mFgSpinner;
 	private Spinner mBgSpinner;
@@ -72,6 +85,7 @@ public class ColorsActivity extends Activity implements OnItemClickListener, OnC
 	private int mCurrentColor = 0;
 
 	private int[] mDefaultColors;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -314,22 +328,35 @@ public class ColorsActivity extends Activity implements OnItemClickListener, OnC
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 
-		MenuItem exportTheme = menu.add(R.string.menu_colors_export);
-		exportTheme.setAlphabeticShortcut('e');
-		exportTheme.setNumericShortcut('2');
-		exportTheme.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		MenuItem load = menu.add(R.string.menu_colors_load);
+		load.setAlphabeticShortcut('i');
+		load.setNumericShortcut('1');
+		load.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				FileChooser.selectFile(ColorsActivity.this, ColorsActivity.this,
+						FileChooser.REQUEST_CODE_SELECT_FILE,
+						getString(R.string.file_chooser_select_file, getString(R.string.select_for_upload)));
+				return true;
+			}
+		});
+
+
+		MenuItem save = menu.add(R.string.menu_colors_save);
+		save.setAlphabeticShortcut('e');
+		save.setNumericShortcut('2');
+		save.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				final EditText textField = new EditText(ColorsActivity.this);
 
 				new AlertDialog.Builder(ColorsActivity.this)
-				.setTitle(R.string.colors_export_file_title)
-				.setMessage(R.string.colors_export_file_desc)
+				.setTitle(R.string.colors_save_string)
+				.setMessage(R.string.colors_save_string_summary)
 				.setView(textField)
 				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						int msg = R.string.colors_export_failure;
-						if (ColorsActivity.this.exportColors(textField.getText().toString()))
-							msg = R.string.colors_export_success;
+						int msg = R.string.colors_save_failure;
+						if (ColorsActivity.this.saveColors(textField.getText().toString()))
+							msg = R.string.colors_save_success;
 
 						Toast.makeText(ColorsActivity.this, msg, Toast.LENGTH_LONG).show();
 					}
@@ -370,20 +397,115 @@ public class ColorsActivity extends Activity implements OnItemClickListener, OnC
 		return true;
 	}
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        switch (requestCode) {
+            case FileChooser.REQUEST_CODE_SELECT_FILE:
+                if (resultCode == RESULT_OK && intent != null) {
+                    Uri uri = intent.getData();
+                    try {
+                        if (uri != null) {
+                            fileSelected(new File(URI.create(uri.toString())));
+                        } else {
+                            String filename = intent.getDataString();
+                            if (filename != null) {
+                                fileSelected(new File(URI.create(filename)));
+                            }
+                        }
+                    } catch (IllegalArgumentException e) {
+                        Log.e(TAG, "Couldn't read from selected file", e);
+                    }
+                }
+                break;
+        }
+    }
+
+    protected String readFile(File file) throws IOException {
+		FileInputStream input = new FileInputStream(file);
+		StringBuffer content = new StringBuffer("");
+		byte[] buffer = new byte[1024];
+
+		while (input.read(buffer) != -1) {
+			content.append(new String(buffer));
+		}
+
+		return content.toString();
+    }
+
+    protected Integer parseColor(final String color) {
+    	final Pattern p = Pattern.compile("^#?(?:ff)?([0-9A-Fa-f]{6})$");
+    	final Matcher m = p.matcher(color);
+    	String rgb;
+
+    	if  (m.matches()) {
+    		rgb = m.group(1);
+    	}
+    	else {
+    		Log.e(TAG, "invalid color: " + color);
+    		return (0xFF000000 | 0);
+    	}
+
+		try {
+			Integer i = Integer.parseInt(rgb, 16);
+			Log.e(TAG, "color " + color + " = " + Integer.toHexString(i));
+			return (0xFF000000 | i);
+		} catch (java.lang.NumberFormatException e) {
+			Log.e(TAG, "unable to parse color: " + rgb);
+			return (0xFF000000 | 0);
+		}
+    }
+
+	protected boolean loadColors(File file) {
+		try {
+			String json = readFile(file);
+			JSONObject config = (JSONObject) new JSONTokener(json).nextValue();
+			JSONArray colors = config.getJSONArray("colors");
+
+			for (int i = 0; i < colors.length(); i++) {
+				Integer color = parseColor(colors.getString(i));
+
+				hostdb.setGlobalColor(i, color);
+				mColorList.set(i, color);
+			}
+
+			Integer fgColor = config.getInt("fg");
+			Integer bgColor = config.getInt("bg");
+
+			mColorGrid.invalidateViews();
+
+			// Reset the default FG/BG colors as well.
+			mFgSpinner.setSelection(fgColor);
+			mBgSpinner.setSelection(bgColor);
+			hostdb.setDefaultColorsForScheme(HostDatabase.DEFAULT_COLOR_SCHEME,
+					fgColor, bgColor);
+
+		} catch (FileNotFoundException e) {
+			return false;
+		} catch (IOException e) {
+			return false;
+		} catch (JSONException e) {
+			return false;
+		}
+
+		return true;
+	}
+
 	/**
-	 * @param themeName
+	 * @param name
 	 */
-	protected boolean exportColors(String themeName) {
+	protected boolean saveColors(String name) {
 		try {
 			String storageDir = Environment.getExternalStorageDirectory().getPath();
-			File file = new File(storageDir + "/" + themeName + ".connectbot-theme");
+			File file = new File(storageDir + "/" + name + ".json");
 			JSONStringer json = new JSONStringer().object();
 
 			json.key("colors").array();
 
 			for (int i = 0; i < 15; i++) {
 				Integer color = mColorList.get(i);
-				json.value("#" + Integer.toHexString(color));
+				json.value(String.format("#%06x", color));
 			}
 
 			json.endArray();
@@ -400,24 +522,28 @@ public class ColorsActivity extends Activity implements OnItemClickListener, OnC
 			out.write(json.toString().getBytes());
 			out.flush();
 			out.close();
-		}
-		catch (RuntimeException e) {
-			Log.w("export", e);
-			return false;
 		} catch (JSONException e) {
-			Log.w("export", e);
+			Log.w("save", e);
 			return false;
 		} catch (FileNotFoundException e) {
-			Log.w("export", e);
+			Log.w("save", e);
 
 			return false;
 		} catch (IOException e) {
-			Log.w("export", e);
+			Log.w("save", e);
 
 			return false;
 		}
 
 		return true;
+
+	}
+
+	/* (non-Javadoc)
+	 * @see sk.vx.connectbot.util.FileChooserCallback#fileSelected(java.io.File)
+	 */
+	public void fileSelected(File f) {
+		loadColors(f);
 
 	}
 }
