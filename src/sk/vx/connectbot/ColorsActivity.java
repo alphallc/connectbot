@@ -17,18 +17,30 @@
 
 package sk.vx.connectbot;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONStringer;
 
 import sk.vx.connectbot.util.Colors;
 import sk.vx.connectbot.util.HostDatabase;
 import sk.vx.connectbot.util.UberColorPickerDialog;
 import sk.vx.connectbot.util.UberColorPickerDialog.OnColorChangedListener;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -38,8 +50,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * @author Kenny Root
@@ -300,6 +314,32 @@ public class ColorsActivity extends Activity implements OnItemClickListener, OnC
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 
+		MenuItem exportTheme = menu.add(R.string.menu_colors_export);
+		exportTheme.setAlphabeticShortcut('e');
+		exportTheme.setNumericShortcut('2');
+		exportTheme.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				final EditText textField = new EditText(ColorsActivity.this);
+
+				new AlertDialog.Builder(ColorsActivity.this)
+				.setTitle(R.string.colors_export_file_title)
+				.setMessage(R.string.colors_export_file_desc)
+				.setView(textField)
+				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						int msg = R.string.colors_export_failure;
+						if (ColorsActivity.this.exportColors(textField.getText().toString()))
+							msg = R.string.colors_export_success;
+
+						Toast.makeText(ColorsActivity.this, msg, Toast.LENGTH_LONG).show();
+					}
+				}).setNegativeButton(android.R.string.cancel, null).create().show();
+
+				return true;
+			}
+		});
+
+
 		MenuItem reset = menu.add(R.string.menu_colors_reset);
 		reset.setAlphabeticShortcut('r');
 		reset.setNumericShortcut('1');
@@ -325,6 +365,59 @@ public class ColorsActivity extends Activity implements OnItemClickListener, OnC
 			}
 		});
 
+
+
 		return true;
+	}
+
+	/**
+	 * @param themeName
+	 */
+	protected boolean exportColors(String themeName) {
+		try {
+			String storageDir = Environment.getExternalStorageDirectory().getPath();
+			File file = new File(storageDir + "/" + themeName + ".connectbot-theme");
+			JSONStringer json = new JSONStringer().object();
+
+			json.key("colors").array();
+
+			for (int i = 0; i < 15; i++) {
+				Integer color = mColorList.get(i);
+				json.value("#" + Integer.toHexString(color));
+			}
+
+			json.endArray();
+
+			json.key("fg");
+			json.value(Integer.toHexString( mDefaultColors[0] ));
+
+			json.key("bg");
+			json.value(Integer.toHexString( mDefaultColors[1] ));
+
+			json.endObject();
+
+			OutputStream out = new FileOutputStream(file);
+			out.write(json.toString().getBytes());
+			out.flush();
+			out.close();
+		}
+		catch (RuntimeException e) {
+			Log.w("export", e);
+			return false;
+		} catch (JSONException e) {
+			Log.w("export", e);
+			return false;
+		} catch (FileNotFoundException e) {
+			Log.w("export", e);
+
+			return false;
+		} catch (IOException e) {
+			Log.w("export", e);
+
+			return false;
+		}
+
+		return true;
+
 	}
 }

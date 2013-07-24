@@ -657,4 +657,10 @@
 	<string name="pref_ctrl_string_summary">String of characters for the CTRL+? combination</string>
 
 	<string name="fullscreen">Fullscreen</string>
+	<string name="colors_export_file_title">Export to File</string>
+	<string name="colors_export_file_desc">Filename is relative to storage directory</string>
+	<string name="colors_export_success">export colors: success</string>
+	<string name="colors_export_failure">export colors: failure</string>
+	<string name="menu_colors_export">Export</string>
+	<string name="menu_colors_import">Import</string>
 </resources>
