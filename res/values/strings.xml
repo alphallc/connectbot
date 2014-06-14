@@ -506,6 +506,12 @@
 	<!-- Menu selection to reset colors to their defaults. -->
 	<string name="menu_colors_reset">"Reset"</string>
 
+	<!-- Menu selection to load colors from file. -->
+	<string name="menu_colors_load">Load</string>
+
+	<!-- Menu selection to save colors to file. -->
+	<string name="menu_colors_save">Save</string>
+
 	<!-- Displayed in the notification bar that connections are active -->
 	<string name="app_is_running">"VX ConnectBot is running"</string>
 
@@ -666,4 +672,10 @@
 	<string name="pref_ctrl_string_summary">String of characters for the CTRL+? combination</string>
 
 	<string name="fullscreen">Fullscreen</string>
+
+	<string name="colors_save_string">Save Colors to File</string>
+	<string name="colors_save_string_summary">Filename is relative to storage directory</string>
+	<string name="colors_save_success">colors saved</string>
+	<string name="colors_save_failure">colors not saved</string>
+
 </resources>
