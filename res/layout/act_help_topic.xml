@@ -24,7 +24,7 @@
 	android:layout_height="fill_parent"
 	>
 
-	<sk.vx.connectbot.util.HelpTopicView
+	<org.alpha-llc.connectbot.util.HelpTopicView
 		android:id="@+id/topic_text"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"

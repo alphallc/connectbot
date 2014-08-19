@@ -193,7 +193,7 @@
 			android:defaultValue="true"
 			/>
 
-		<sk.vx.connectbot.util.VolumePreference
+		<org.alpha-llc.connectbot.util.VolumePreference
 			android:key="bellVolume"
 			android:title="@string/pref_bell_volume_title"
 			/>

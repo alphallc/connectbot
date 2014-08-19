@@ -16,7 +16,7 @@
  limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="sk.vx.connectbot"
+	package="org.alpha-llc.connectbot"
 	android:versionName="1.7.1-27"
 	android:versionCode="27"
 	android:installLocation="auto">
@@ -84,11 +84,11 @@
 		<activity android:name=".ColorsActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="com.lamerman.FileDialog" android:configChanges="keyboardHidden|orientation" />
 
-		<service android:name="sk.vx.connectbot.service.TerminalManager"
+		<service android:name="org.alpha-llc.connectbot.service.TerminalManager"
 			android:configChanges="keyboardHidden|orientation"
 			android:description="@string/service_desc" />
 			
-		<service android:name="sk.vx.connectbot.service.AuthAgentService"
+		<service android:name="org.alpha-llc.connectbot.service.AuthAgentService"
 			android:description="@string/auth_agent_service_desc"
 			android:permission="org.openintents.ssh.permission.ACCESS_SSH_AGENT">
 			<intent-filter>

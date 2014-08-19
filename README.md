@@ -1,15 +1,16 @@
-﻿VX ConnectBot
+﻿__NAME__
 =========
 
-Copyright (c) 2012 Martin Matuška <martin at matuska dot vx dot sk>
+Copyright (c) 2014 Vadim A. Misbakh-Soloviov <mva at mva dot name>
+Copyright (c) 2014 ConnectBot Community (see commitlog)
 
 ## Description
 
-VX ConnectBot is an enhanced version of the popular open-source telnet and secure shell (SSH) client ConnectBot.
+__NAME__ is an enhanced version of the popular open-source telnet and secure shell (SSH) client ConnectBot.
 
 ## Features and enhancements
 
- - based on ConnectBot 1.7.1
+ - based on (VX and oroginal) ConnectBot 1.7.1
  - background file transfer (SCP protocol)
  - screen capture (save a PNG screenshot of the console)
  - character picker dialog (on-screen and hardware SYM keys)
@@ -18,7 +19,10 @@ VX ConnectBot is an enhanced version of the popular open-source telnet and secur
  - tap-and hold on on-screen buttons with various manus
  - ssh-agent from Roberto Tyley
  - X11 forwarding support
-  
+ - SOCKS5 Proxy support
+ - Color Theme managment
+ - Public key registration (ssh-copy-id analog)
+
 ### New key mappings:
 
  - ALT + Up Arrow maps to Page Up
@@ -30,33 +34,25 @@ VX ConnectBot is an enhanced version of the popular open-source telnet and secur
 
 ## Device Customization
 
-VX ConnectBot aims to provide customizations for Android devices with a physical keyboard.
-Currently, there are customizations for the following devices:
+Our base (VX ConnectBot) aimed to provide customizations for Android devices with a physical keyboard, and we keeping that enchancements in place.
 
- - Full hardware keyboard (e.g. external bluetooth keyboard)
- - ASUS Transformer Pad Series Mobile Dock
- - Samsung Captivate Glide (SGH-i927)
- - Sony Ericsson Xperia pro (MK16i)
- - Sony Ericsson Xperia mini pro (SK17i)
- 
-The following devices with physical keyboards are also reported to work properly:
- - Motorola Droid 4 (XT894)
-
-Individual key mappings can be viewed [here](http://connectbot.vx.sk/customkeymap.html)
+Full list of supported devices and individual key mappings can be viewed [here](http://connectbot.vx.sk/customkeymap.html)
 
 ## License
 
-VX ConnectBot is licensed under the Apache License, Version 2.0
+__NAME__ is licensed under the Apache License, Version 2.0
 
 ## Download
 
-[VX Connectbot Homepage](http://connectbot.vx.sk)
-
-[VX Connectbot on Android Market](https://market.android.com/details?id=sk.vx.connectbot)
+[VX Connectbot on Android Market](https://market.android.com/details?id=org.alpha-llc.__NAME__)
 
 ## Credits
 
-This software is based on [ConnectBot](http://code.google.com/p/connectbot/)
+This software initially based on [VX ConnectBot](https://github.com/vx/connectbot)
+
+VX ConnectBot Copyright (c) 2012 Martin Matuška <martin at matuska dot vx dot sk>
+
+Which, in his part, is based on "original" [ConnectBot](http://code.google.com/p/connectbot/)
 
 ConnectBot Copyright (c) 2007-2011 [Kenny Root](http://the-b.org), [Jeffrey Sharkey](http://jsharkey.org)
 
