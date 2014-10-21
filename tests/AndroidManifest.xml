@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- package name must be unique so suffix with "tests" so package loader doesn't ignore us -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.alpha-llc.connectbot.tests"
+          package="org.alpha-llc.sshit.tests"
           android:versionCode="1"
           android:versionName="1.0">
     <!-- We add an application tag here just so that we can indicate that
@@ -17,5 +17,5 @@
     -->
     <instrumentation android:name="android.test.InstrumentationTestRunner"
                      android:targetPackage="org.connectbot"
-                     android:label="Tests for ConnectBot" />
+                     android:label="Tests for sshIt" />
 </manifest>

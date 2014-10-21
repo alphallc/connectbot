@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
- * ConnectBot: simple, powerful, open-source SSH client for Android
- * Copyright 2007 Kenny Root, Jeffrey Sharkey
+ * sshIt: simple, powerful, open-source SSH client for Android
+ * Copyright 2014 Alpha LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@
 	<string name="auth_agent_service_desc">"Acts as an ssh-agent for other Android Apps on the device"</string>
 
 	<string name="ssh_agent_permission_label">use SSH keys stored in your SSH Agent</string>
-    <string name="ssh_agent_permission_desc">Allows the application to authenticate SSH transactions using your private keys stored in ConnectBot.
+    <string name="ssh_agent_permission_desc">Allows the application to authenticate SSH transactions using your private keys stored in sshIt.
 		VERY DANGEROUS if used by a malicious application.</string>
 
 	<!-- Window title for the Host List -->
@@ -49,7 +49,7 @@
 	<string name="menu_preferences">"Preferences"</string>
 
 	<string name="help_intro">"Please select a topic below for more information on a particular subject."</string>
-	<string name="help_about">"About ConnectBot"</string>
+	<string name="help_about">"About sshIt"</string>
 	<string name="help_keyboard">"Keyboard"</string>
 
 	<string name="pubkey_generate">"Generate"</string>
@@ -173,7 +173,7 @@
 	<!-- Name for the update check preference -->
 	<string name="pref_update_title">"Update check"</string>
 	<!-- Summary for the update check preference -->
-	<string name="pref_update_summary">"Set the maximum frequency to check for ConnectBot updates"</string>
+	<string name="pref_update_summary">"Set the maximum frequency to check for sshIt updates"</string>
 
 	<!-- Name for the preference that forces the service to stay running in the background.-->
 	<string name="pref_conn_persist_title">"Persist connections"</string>
@@ -502,8 +502,8 @@
 	<!-- Preference selection for SSH Authentication Agent to be able to use pubkeys -->
 	<string name="yes">"Yes"</string>
 
-	<!-- String displayed to user when they're asked to submit exceptions to the ConnectBot developers -->
-	<string name="exceptions_submit_message">"It appears ConnectBot had a problem last time it ran.  Submit error report to ConnectBot developers?"</string>
+	<!-- String displayed to user when they're asked to submit exceptions to the sshIt developers -->
+	<string name="exceptions_submit_message">"It appears sshIt had a problem last time it ran.  Submit error report to sshIt developers?"</string>
 
 	<!-- Menu selection to reset colors to their defaults. -->
 	<string name="menu_colors_reset">"Reset"</string>
@@ -515,7 +515,7 @@
 	<string name="menu_colors_save">Save</string>
 
 	<!-- Displayed in the notification bar that connections are active -->
-	<string name="app_is_running">"VX ConnectBot is running"</string>
+	<string name="app_is_running">"sshIt is running"</string>
 
 	<string name="color_red">"red"</string>
 	<string name="color_green">"green"</string>

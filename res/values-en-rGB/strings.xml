@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
- * ConnectBot: simple, powerful, open-source SSH client for Android
- * Copyright 2007 Kenny Root, Jeffrey Sharkey
+ * sshIt: simple, powerful, open-source SSH client for Android
+ * Copyright 2014 Alpha LLC
  * Copyright 2011 Darren Salt
  *
  * This file is derived from res/values/strings.xml

@@ -16,25 +16,25 @@ org.apache.harmony.niochar.charset.additional.IBM437$Decoder
 org.apache.harmony.niochar.charset.additional.IBM437$Decoder: int nDecode(char[],int,int,long,int)
 org.apache.harmony.niochar.charset.additional.IBM437$Encoder
 org.apache.harmony.niochar.charset.additional.IBM437$Encoder: void nEncode(long,int,char[],int,int[])
-org.alpha-llc.connectbot.ColorsActivity
-org.alpha-llc.connectbot.ConsoleActivity
-org.alpha-llc.connectbot.GeneratePubkeyActivity
-org.alpha-llc.connectbot.HelpActivity
-org.alpha-llc.connectbot.HelpTopicActivity
-org.alpha-llc.connectbot.HostEditorActivity
-org.alpha-llc.connectbot.HostListActivity
-org.alpha-llc.connectbot.PortForwardListActivity
-org.alpha-llc.connectbot.PubkeyListActivity
-org.alpha-llc.connectbot.SettingsActivity
-org.alpha-llc.connectbot.WizardActivity
-org.alpha-llc.connectbot.service.BackupAgent
-org.alpha-llc.connectbot.service.ConnectivityReceiver
-org.alpha-llc.connectbot.service.TerminalManager
-org.alpha-llc.connectbot.util.EntropyView
-org.alpha-llc.connectbot.util.EntropyView: EntropyView(android.content.Context,android.util.AttributeSet)
-org.alpha-llc.connectbot.util.HelpTopicView
-org.alpha-llc.connectbot.util.HelpTopicView: HelpTopicView(android.content.Context,android.util.AttributeSet,int)
-org.alpha-llc.connectbot.util.HelpTopicView: HelpTopicView(android.content.Context,android.util.AttributeSet)
-org.alpha-llc.connectbot.util.VolumePreference
-org.alpha-llc.connectbot.util.VolumePreference: VolumePreference(android.content.Context,android.util.AttributeSet)
-org.alpha-llc.connectbot.util.VolumePreference: VolumePreference(android.content.Context,android.util.AttributeSet,int)
+org.alpha-llc.sshit.ColorsActivity
+org.alpha-llc.sshit.ConsoleActivity
+org.alpha-llc.sshit.GeneratePubkeyActivity
+org.alpha-llc.sshit.HelpActivity
+org.alpha-llc.sshit.HelpTopicActivity
+org.alpha-llc.sshit.HostEditorActivity
+org.alpha-llc.sshit.HostListActivity
+org.alpha-llc.sshit.PortForwardListActivity
+org.alpha-llc.sshit.PubkeyListActivity
+org.alpha-llc.sshit.SettingsActivity
+org.alpha-llc.sshit.WizardActivity
+org.alpha-llc.sshit.service.BackupAgent
+org.alpha-llc.sshit.service.ConnectivityReceiver
+org.alpha-llc.sshit.service.TerminalManager
+org.alpha-llc.sshit.util.EntropyView
+org.alpha-llc.sshit.util.EntropyView: EntropyView(android.content.Context,android.util.AttributeSet)
+org.alpha-llc.sshit.util.HelpTopicView
+org.alpha-llc.sshit.util.HelpTopicView: HelpTopicView(android.content.Context,android.util.AttributeSet,int)
+org.alpha-llc.sshit.util.HelpTopicView: HelpTopicView(android.content.Context,android.util.AttributeSet)
+org.alpha-llc.sshit.util.VolumePreference
+org.alpha-llc.sshit.util.VolumePreference: VolumePreference(android.content.Context,android.util.AttributeSet)
+org.alpha-llc.sshit.util.VolumePreference: VolumePreference(android.content.Context,android.util.AttributeSet,int)

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# ConnectBot: simple, powerful, open-source SSH client for Android
+# sshIt: simple, powerful, open-source SSH client for Android
 # Copyright 2011 Kenny Root, Jeffrey Sharkey
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

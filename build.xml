@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- vim: set ts=4 sw=4 et: -->
-<project name="VX ConnectBot" default="help">
+<project name="sshIt" default="help">
 
     <!-- The local.properties file is created and updated by the 'android' tool.
          It contains the path to the SDK. It should *NOT* be checked into
@@ -78,7 +78,7 @@
     <!-- version-tag: custom -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
 
-<!-- Begin custom ConnectBot stuff -->
+<!-- Begin custom sshIt stuff -->
 
     <!-- Output directory for .po files. -->
     <property name="locale.dir" value="locale" />
@@ -204,6 +204,6 @@
         </exec>
     </target>
 
-<!-- End custom ConnectBot stuff -->
+<!-- End custom sshIt stuff -->
 
 </project>

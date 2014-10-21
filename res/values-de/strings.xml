@@ -4,7 +4,7 @@
   <string name="service_desc">Hält SSH-Verbindungen und geladene öffentliche Schlüssel aufrecht</string>
   <string name="auth_agent_service_desc">Handelt als SSH-Agent für andere Anwendungen am Gerät</string>
   <string name="ssh_agent_permission_label">Im SSH-Agent gespeicherte Schlüssel verwenden</string>
-  <string name="ssh_agent_permission_desc">Erlaubt der Anwendung SSH-Transaktionen zu authentifizieren mit Ihren im ConnectBot gespeicherten Privatschlüsseln.
+  <string name="ssh_agent_permission_desc">Erlaubt der Anwendung SSH-Transaktionen zu authentifizieren mit Ihren im sshIt gespeicherten Privatschlüsseln.
   		SEHR GEFÄHRLICH - kann von böswilligen Anwendungen mißbraucht werden.</string>
   <string name="title_hosts_list">Hosts</string>
   <string name="title_pubkey_list">Öffentliche Schlüssel</string>
@@ -18,7 +18,7 @@
   <string name="menu_delete">Host löschen</string>
   <string name="menu_preferences">Einstellungen</string>
   <string name="help_intro">Für mehr Informationen wählen Sie eine Überschrift!</string>
-  <string name="help_about">Über ConnectBot</string>
+  <string name="help_about">Über sshIt</string>
   <string name="help_keyboard">Tastatur</string>
   <string name="pubkey_generate">Erzeugen</string>
   <string name="pubkey_import">Importieren</string>
@@ -83,7 +83,7 @@
   <string name="pref_memkeys_title">Schlüssel im Speicher behalten</string>
   <string name="pref_memkeys_summary">Entsperrte Schlüssel im Speicher halten, bis der Hintergrunddienst beendet wurde</string>
   <string name="pref_update_title">Aktualisierungen suchen</string>
-  <string name="pref_update_summary">Die maximale Frequenz einstellen, mit der nach ConnectBot Aktualisierungen gesucht werden soll</string>
+  <string name="pref_update_summary">Die maximale Frequenz einstellen, mit der nach sshIt Aktualisierungen gesucht werden soll</string>
   <string name="pref_conn_persist_title">Persistente Verbindungen</string>
   <string name="pref_conn_persist_summary">Erhalte Verbindungen auch im Hintergrund</string>
   <string name="pref_keymode_title">Verzeichniskürzel</string>
@@ -225,9 +225,9 @@
   <string name="no">Nein</string>
   <string name="with_confirmation">Mit Bestätigung</string>
   <string name="yes">Ja</string>
-  <string name="exceptions_submit_message">Scheinbar hatte ConnectBot Probleme bei der letzten Benutzung. Fehlermeldung an die ConnectBot übermitteln?</string>
+  <string name="exceptions_submit_message">Scheinbar hatte sshIt Probleme bei der letzten Benutzung. Fehlermeldung an die sshIt übermitteln?</string>
   <string name="menu_colors_reset">Zurücksetzen</string>
-  <string name="app_is_running">VX ConnectBot läuft</string>
+  <string name="app_is_running">sshIt läuft</string>
   <string name="color_red">rot</string>
   <string name="color_green">grün</string>
   <string name="color_blue">blau</string>

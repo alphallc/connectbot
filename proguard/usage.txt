@@ -714,7 +714,7 @@ org.apache.harmony.niochar.charset.additional.IBM437$Decoder:
 org.apache.harmony.niochar.charset.additional.IBM437$Encoder:
     private native void nEncode(long,int,char[],int,int[])
 org.openintents.intents.FileManagerIntents
-org.alpha-llc.connectbot.ConsoleActivity:
+org.alpha-llc.sshit.ConsoleActivity:
     public static final java.lang.String TAG
     protected static final int REQUEST_EDIT
     private static final int CLICK_TIME
@@ -722,48 +722,48 @@ org.alpha-llc.connectbot.ConsoleActivity:
     private static final int KEYBOARD_DISPLAY_TIME
     private static final int SHIFT_LEFT
     private static final int SHIFT_RIGHT
-org.alpha-llc.connectbot.GeneratePubkeyActivity:
+org.alpha-llc.sshit.GeneratePubkeyActivity:
     public static final java.lang.String TAG
     static final int DEFAULT_BITS
-org.alpha-llc.connectbot.HelpActivity:
+org.alpha-llc.sshit.HelpActivity:
     public static final java.lang.String TAG
     public static final java.lang.String HELPDIR
     public static final java.lang.String SUFFIX
-org.alpha-llc.connectbot.HelpTopicActivity:
+org.alpha-llc.sshit.HelpTopicActivity:
     public static final java.lang.String TAG
-org.alpha-llc.connectbot.HostEditorActivity:
+org.alpha-llc.sshit.HostEditorActivity:
     protected static final java.lang.String TAG
-org.alpha-llc.connectbot.HostListActivity:
+org.alpha-llc.sshit.HostListActivity:
     public static final int REQUEST_EDIT
     public static final int REQUEST_EULA
-org.alpha-llc.connectbot.HostListActivity$HostAdapter:
+org.alpha-llc.sshit.HostListActivity$HostAdapter:
     public static final int STATE_UNKNOWN
     public static final int STATE_CONNECTED
     public static final int STATE_DISCONNECTED
-org.alpha-llc.connectbot.PortForwardListActivity:
+org.alpha-llc.sshit.PortForwardListActivity:
     public static final java.lang.String TAG
     private static final int LISTENER_CYCLE_TIME
-org.alpha-llc.connectbot.PubkeyListActivity:
+org.alpha-llc.sshit.PubkeyListActivity:
     public static final java.lang.String TAG
     private static final int MAX_KEYFILE_SIZE
     private static final int REQUEST_CODE_PICK_FILE
     private static final java.lang.String ANDEXPLORER_TITLE
     private static final java.lang.String MIME_TYPE_ANDEXPLORER_FILE
-org.alpha-llc.connectbot.R
-org.alpha-llc.connectbot.R$anim
-org.alpha-llc.connectbot.R$array
-org.alpha-llc.connectbot.R$attr
-org.alpha-llc.connectbot.R$color
-org.alpha-llc.connectbot.R$drawable
-org.alpha-llc.connectbot.R$id
-org.alpha-llc.connectbot.R$layout
-org.alpha-llc.connectbot.R$raw
-org.alpha-llc.connectbot.R$string
-org.alpha-llc.connectbot.R$style
-org.alpha-llc.connectbot.R$xml
-org.alpha-llc.connectbot.SettingsActivity:
+org.alpha-llc.sshit.R
+org.alpha-llc.sshit.R$anim
+org.alpha-llc.sshit.R$array
+org.alpha-llc.sshit.R$attr
+org.alpha-llc.sshit.R$color
+org.alpha-llc.sshit.R$drawable
+org.alpha-llc.sshit.R$id
+org.alpha-llc.sshit.R$layout
+org.alpha-llc.sshit.R$raw
+org.alpha-llc.sshit.R$string
+org.alpha-llc.sshit.R$style
+org.alpha-llc.sshit.R$xml
+org.alpha-llc.sshit.SettingsActivity:
     private static final java.lang.String TAG
-org.alpha-llc.connectbot.TerminalView:
+org.alpha-llc.sshit.TerminalView:
     private static final java.lang.String BACKSPACE_CODE
     private static final java.lang.String CONTROL_CODE_PATTERN
     private static final int ACCESSIBILITY_EVENT_THRESHOLD
@@ -771,11 +771,11 @@ org.alpha-llc.connectbot.TerminalView:
     private static final java.lang.String SCREENREADER_INTENT_CATEGORY
     152:153:public void destroy()
     292:293:public void setNotifications(boolean)
-org.alpha-llc.connectbot.bean.AbstractBean:
+org.alpha-llc.sshit.bean.AbstractBean:
     public abstract android.content.ContentValues getValues()
     public abstract java.lang.String getBeanName()
     34:46:public java.lang.String toXML()
-org.alpha-llc.connectbot.bean.HostBean:
+org.alpha-llc.sshit.bean.HostBean:
     public static final java.lang.String BEAN_NAME
     59:59:public java.lang.String getBeanName()
     62:68:public HostBean(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)
@@ -785,12 +785,12 @@ org.alpha-llc.connectbot.bean.HostBean:
     122:125:public byte[] getHostKey()
     143:143:public boolean getUseKeys()
     205:210:public java.lang.String getDescription()
-org.alpha-llc.connectbot.bean.PortForwardBean:
+org.alpha-llc.sshit.bean.PortForwardBean:
     public static final java.lang.String BEAN_NAME
     78:78:public java.lang.String getBeanName()
     151:152:public void setDestAddr(java.lang.String)
     165:166:public void setDestPort(int)
-org.alpha-llc.connectbot.bean.PubkeyBean:
+org.alpha-llc.sshit.bean.PubkeyBean:
     public static final java.lang.String BEAN_NAME
     private static final java.lang.String KEY_TYPE_RSA
     private static final java.lang.String KEY_TYPE_DSA
@@ -799,30 +799,30 @@ org.alpha-llc.connectbot.bean.PubkeyBean:
     172:172:public boolean isUnlocked()
     176:177:public void setUnlockedPrivate(java.lang.Object)
     180:180:public java.lang.Object getUnlockedPrivate()
-org.alpha-llc.connectbot.service.BackupWrapper
-org.alpha-llc.connectbot.service.BackupWrapper$FroyoAndBeyond
-org.alpha-llc.connectbot.service.BackupWrapper$FroyoAndBeyond$Holder
-org.alpha-llc.connectbot.service.BackupWrapper$PreFroyo
-org.alpha-llc.connectbot.service.BackupWrapper$PreFroyo$Holder
-org.alpha-llc.connectbot.service.ConnectionNotifier:
+org.alpha-llc.sshit.service.BackupWrapper
+org.alpha-llc.sshit.service.BackupWrapper$FroyoAndBeyond
+org.alpha-llc.sshit.service.BackupWrapper$FroyoAndBeyond$Holder
+org.alpha-llc.sshit.service.BackupWrapper$PreFroyo
+org.alpha-llc.sshit.service.BackupWrapper$PreFroyo$Holder
+org.alpha-llc.sshit.service.ConnectionNotifier:
     private static final int ONLINE_NOTIFICATION
     private static final int ACTIVITY_NOTIFICATION
     126:127:public void hideActivityNotification(android.app.Service)
-org.alpha-llc.connectbot.service.ConnectivityReceiver:
+org.alpha-llc.sshit.service.ConnectivityReceiver:
     private static final java.lang.String TAG
-org.alpha-llc.connectbot.service.Relay:
+org.alpha-llc.sshit.service.Relay:
     private static final java.lang.String TAG
     private static final int BUFFER_SIZE
-org.alpha-llc.connectbot.service.TerminalBridge:
+org.alpha-llc.sshit.service.TerminalBridge:
     public static final java.lang.String TAG
     public static final int DEFAULT_FONT_SIZE
     private static final int FONT_SIZE_STEP
     289:294:public java.lang.String[] replyToChallenge(java.lang.String,java.lang.String,int,java.lang.String[],boolean[])
-    530:531:public void removeFontSizeChangedListener(org.alpha-llc.connectbot.service.FontSizeChangedListener)
+    530:531:public void removeFontSizeChangedListener(org.alpha-llc.sshit.service.FontSizeChangedListener)
     635:637:public synchronized void parentDestroyed()
     646:647:public void setVDUBuffer(de.mud.terminal.VDUBuffer)
     650:650:public de.mud.terminal.VDUBuffer getVDUBuffer()
-org.alpha-llc.connectbot.service.TerminalKeyListener:
+org.alpha-llc.sshit.service.TerminalKeyListener:
     private static final java.lang.String TAG
     public static final int META_CTRL_ON
     public static final int META_CTRL_LOCK
@@ -839,25 +839,25 @@ org.alpha-llc.connectbot.service.TerminalKeyListener:
     public static final int HC_META_CTRL_ON
     public static final int META_TRANSIENT
     602:603:public void setTerminalKeyMode(java.lang.String)
-org.alpha-llc.connectbot.service.TerminalManager:
+org.alpha-llc.sshit.service.TerminalManager:
     public static final java.lang.String TAG
     public static final long VIBRATE_DURATION
     424:428:public java.lang.Object getKey(byte[])
-org.alpha-llc.connectbot.transport.AbsTransport:
-    44:48:public AbsTransport(org.alpha-llc.connectbot.bean.HostBean,org.alpha-llc.connectbot.service.TerminalBridge,org.alpha-llc.connectbot.service.TerminalManager)
+org.alpha-llc.sshit.transport.AbsTransport:
+    44:48:public AbsTransport(org.alpha-llc.sshit.bean.HostBean,org.alpha-llc.sshit.service.TerminalBridge,org.alpha-llc.sshit.service.TerminalManager)
     54:54:public static java.lang.String getProtocolName()
     62:62:public static android.net.Uri getUri(java.lang.String)
     124:124:public void setOptions(java.util.Map)
     127:127:public java.util.Map getOptions()
     public abstract int getDefaultPort()
     public abstract java.lang.String getDefaultNickname(java.lang.String,java.lang.String,int)
-org.alpha-llc.connectbot.transport.Local:
+org.alpha-llc.sshit.transport.Local:
     private static final java.lang.String TAG
     private static final java.lang.String PROTOCOL
     private static final java.lang.String DEFAULT_URI
-    64:65:public Local(org.alpha-llc.connectbot.bean.HostBean,org.alpha-llc.connectbot.service.TerminalBridge,org.alpha-llc.connectbot.service.TerminalManager)
+    64:65:public Local(org.alpha-llc.sshit.bean.HostBean,org.alpha-llc.sshit.service.TerminalBridge,org.alpha-llc.sshit.service.TerminalManager)
     131:131:public int getDefaultPort()
-org.alpha-llc.connectbot.transport.SSH:
+org.alpha-llc.sshit.transport.SSH:
     private static final java.lang.String PROTOCOL
     private static final java.lang.String TAG
     private static final int DEFAULT_PORT
@@ -866,32 +866,32 @@ org.alpha-llc.connectbot.transport.SSH:
     private static final java.lang.String AUTH_KEYBOARDINTERACTIVE
     private static final int AUTH_TRIES
     private static final int conditions
-    85:86:public SSH(org.alpha-llc.connectbot.bean.HostBean,org.alpha-llc.connectbot.service.TerminalBridge,org.alpha-llc.connectbot.service.TerminalManager)
+    85:86:public SSH(org.alpha-llc.sshit.bean.HostBean,org.alpha-llc.sshit.service.TerminalBridge,org.alpha-llc.sshit.service.TerminalManager)
     539:543:public java.util.Map getOptions()
     548:550:public void setOptions(java.util.Map)
     735:735:public int getDefaultPort()
-org.alpha-llc.connectbot.transport.Telnet:
+org.alpha-llc.sshit.transport.Telnet:
     private static final java.lang.String TAG
     private static final java.lang.String PROTOCOL
     private static final int DEFAULT_PORT
-    118:119:public Telnet(org.alpha-llc.connectbot.bean.HostBean,org.alpha-llc.connectbot.service.TerminalBridge,org.alpha-llc.connectbot.service.TerminalManager)
+    118:119:public Telnet(org.alpha-llc.sshit.bean.HostBean,org.alpha-llc.sshit.service.TerminalBridge,org.alpha-llc.sshit.service.TerminalManager)
     162:162:public int getDefaultPort()
-org.alpha-llc.connectbot.transport.TransportFactory:
+org.alpha-llc.sshit.transport.TransportFactory:
     private static final java.lang.String TAG
-    79:82:public static boolean isSameTransportType(org.alpha-llc.connectbot.transport.AbsTransport,org.alpha-llc.connectbot.transport.AbsTransport)
-org.alpha-llc.connectbot.util.EastAsianWidth$PreFroyo:
+    79:82:public static boolean isSameTransportType(org.alpha-llc.sshit.transport.AbsTransport,org.alpha-llc.sshit.transport.AbsTransport)
+org.alpha-llc.sshit.util.EastAsianWidth$PreFroyo:
     private static final int BUFFER_SIZE
-org.alpha-llc.connectbot.util.Encryptor:
+org.alpha-llc.sshit.util.Encryptor:
     private static final java.lang.String CHARSET_NAME
     private static final java.lang.String RNG_ALGORITHM
     private static final java.lang.String DIGEST_ALGORITHM
     private static final java.lang.String KEY_ALGORITHM
     private static final java.lang.String CIPHER_ALGORITHM
-org.alpha-llc.connectbot.util.EntropyView:
+org.alpha-llc.sshit.util.EntropyView:
     private static final int SHA1_MAX_BYTES
     private static final int MILLIS_BETWEEN_INPUTS
-    84:85:public void removeOnEntropyGatheredListener(org.alpha-llc.connectbot.util.OnEntropyGatheredListener)
-org.alpha-llc.connectbot.util.HostDatabase:
+    84:85:public void removeOnEntropyGatheredListener(org.alpha-llc.sshit.util.OnEntropyGatheredListener)
+org.alpha-llc.sshit.util.HostDatabase:
     public static final java.lang.String TAG
     public static final java.lang.String DB_NAME
     public static final int DB_VERSION
@@ -951,8 +951,8 @@ org.alpha-llc.connectbot.util.HostDatabase:
     public static final java.lang.String CREATE_TABLE_COLOR_DEFAULTS_INDEX
     private static final java.lang.String WHERE_SCHEME_AND_COLOR
     737:737:public int[] getGlobalDefaultColors()
-org.alpha-llc.connectbot.util.OnDbWrittenListener
-org.alpha-llc.connectbot.util.PreferenceConstants:
+org.alpha-llc.sshit.util.OnDbWrittenListener
+org.alpha-llc.sshit.util.PreferenceConstants:
     public static final java.lang.String MEMKEYS
     public static final java.lang.String UPDATE
     public static final java.lang.String UPDATE_DAILY
@@ -987,7 +987,7 @@ org.alpha-llc.connectbot.util.PreferenceConstants:
     public static final float DEFAULT_BELL_VOLUME
     public static final java.lang.String CONNECTION_PERSIST
     public static final java.lang.String BACKUP_PREF_KEY
-org.alpha-llc.connectbot.util.PubkeyDatabase:
+org.alpha-llc.sshit.util.PubkeyDatabase:
     public static final java.lang.String TAG
     public static final java.lang.String DB_NAME
     public static final int DB_VERSION
@@ -1003,13 +1003,13 @@ org.alpha-llc.connectbot.util.PubkeyDatabase:
     public static final java.lang.String KEY_TYPE_RSA
     public static final java.lang.String KEY_TYPE_DSA
     public static final java.lang.String KEY_TYPE_IMPORTED
-org.alpha-llc.connectbot.util.PubkeyUtils:
+org.alpha-llc.sshit.util.PubkeyUtils:
     public static final java.lang.String PKCS8_START
     public static final java.lang.String PKCS8_END
     private static final int SALT_SIZE
     private static final int ITERATIONS
     154:156:public static java.security.PublicKey decodePublic(byte[],java.lang.String)
-org.alpha-llc.connectbot.util.UberColorPickerDialog$ColorPickerView:
+org.alpha-llc.sshit.util.UberColorPickerDialog$ColorPickerView:
     private static final int SWATCH_HEIGHT
     private static final int SLIDER_THICKNESS
     private static final int METHOD_HS_V_PALETTE
@@ -1020,4 +1020,4 @@ org.alpha-llc.connectbot.util.UberColorPickerDialog$ColorPickerView:
     private static final int TRACK_VER_VALUE_SLIDER
     private static final int TEXT_SIZE
     private static final float PI
-org.alpha-llc.connectbot.util.XmlBuilder
+org.alpha-llc.sshit.util.XmlBuilder

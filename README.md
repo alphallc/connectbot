@@ -1,16 +1,16 @@
-﻿__NAME__
+﻿sshIt
 =========
 
-Copyright (c) 2014 Vadim A. Misbakh-Soloviov <mva at mva dot name>
+Copyright (c) 2014 AlphaLLC Android Dev Dept <android@alpha-llc.org>
 Copyright (c) 2014 ConnectBot Community (see commitlog)
 
 ## Description
 
-__NAME__ is an enhanced version of the popular open-source telnet and secure shell (SSH) client ConnectBot.
+sshIt is open-source telnet and secure shell (SSH) client, based on ConnectBot and it's successors.
 
 ## Features and enhancements
 
- - based on (VX and oroginal) ConnectBot 1.7.1
+ - based on (VX and original) ConnectBot 1.7.1
  - background file transfer (SCP protocol)
  - screen capture (save a PNG screenshot of the console)
  - character picker dialog (on-screen and hardware SYM keys)
@@ -34,17 +34,17 @@ __NAME__ is an enhanced version of the popular open-source telnet and secure she
 
 ## Device Customization
 
-Our base (VX ConnectBot) aimed to provide customizations for Android devices with a physical keyboard, and we keeping that enchancements in place.
+Our base project (VX ConnectBot), before it's freeze, was aimed to provide customizations for Android devices with a physical keyboard, and we keeping that enchancements in place.
 
 Full list of supported devices and individual key mappings can be viewed [here](http://connectbot.vx.sk/customkeymap.html)
 
 ## License
 
-__NAME__ is licensed under the Apache License, Version 2.0
+sshIt is licensed under the Apache License, Version 2.0
 
 ## Download
 
-[VX Connectbot on Android Market](https://market.android.com/details?id=org.alpha-llc.__NAME__)
+[sshIt on Android Market](https://market.android.com/details?id=org.alpha-llc.sshit)
 
 ## Credits
 
