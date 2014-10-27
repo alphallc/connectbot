@@ -25,6 +25,7 @@
 		<item>vt100</item>
 		<item>ansi</item>
 		<item>screen</item>
+		<item>screen-256color</item>
 	</string-array>
 
 	<string-array name="list_rotation" translatable="false">

@@ -3,3 +3,6 @@ gen
 launchpad-*.tar.gz
 local.properties
 *~
+proguard/*.txt
+*.kdev4
+

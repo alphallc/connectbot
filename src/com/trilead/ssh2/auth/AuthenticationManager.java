@@ -33,6 +33,7 @@ import com.trilead.ssh2.signature.RSASHA1Verify;
 import com.trilead.ssh2.transport.MessageHandler;
 import com.trilead.ssh2.transport.TransportManager;
 
+import android.util.Log;
 
 /**
  * AuthenticationManager.
@@ -171,6 +172,37 @@ public class AuthenticationManager implements MessageHandler
 		return authenticatePublicKey(user, pair, rnd);
 	}
 
+public static String byteContentDec(byte[] b)
+{
+	int value = 0;
+	String str = "";
+
+	for(int i=0; i<b.length; i++) {
+		value = 0;
+		value = (value << 8) | b[i];
+		str = str.concat(value+"").concat(" ");
+	}
+
+    return str;
+}
+public static String byteContentHex(byte[] b)
+{
+	String str = "";
+	int v = 0;
+
+	for(int i=0; i<b.length; i++) {
+		v = b[i];
+
+		if (b[i] < 0) {
+			v = v + 255;
+		}
+
+		str = str.concat(Integer.toHexString(0x100 | v).substring(1).toUpperCase()).concat(" ");
+	}
+
+    return str;
+}
+
 	public boolean authenticatePublicKey(String user, KeyPair pair, SecureRandom rnd)
 			throws IOException
 	{
@@ -256,20 +288,48 @@ public class AuthenticationManager implements MessageHandler
 					byte[] H = tm.getSessionIdentifier();
 
 					tw.writeString(H, 0, H.length);
+Log.i(":::::::TRILEAD:::::::::AuthMan::H::",byteContentHex(H));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 					tw.writeByte(Packets.SSH_MSG_USERAUTH_REQUEST);
+Log.i(":::::::TRILEAD:::::::::AuthMan::SSH_MSG_USERAUTH_REQUEST::",byteContentHex(Integer.toString(Packets.SSH_MSG_USERAUTH_REQUEST).getBytes()));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 					tw.writeString(user);
+Log.i(":::::::TRILEAD:::::::::AuthMan::user::",byteContentHex(user.getBytes()));
+Log.i(":::::::TRILEAD:::::::::AuthMan::user_S::",user);
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 					tw.writeString("ssh-connection");
+Log.i(":::::::TRILEAD:::::::::AuthMan::ssh-connection::",byteContentHex(("ssh-connection").getBytes()));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 					tw.writeString("publickey");
+Log.i(":::::::TRILEAD:::::::::AuthMan::publickey::",byteContentHex(("publickey").getBytes()));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 					tw.writeBoolean(true);
+Log.i(":::::::TRILEAD:::::::::AuthMan::true::",byteContentHex(new byte[] {1}));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 					tw.writeString(algo);
+Log.i(":::::::TRILEAD:::::::::AuthMan::algo::",byteContentHex(algo.getBytes()));
+Log.i(":::::::TRILEAD:::::::::AuthMan::algo_S::",algo);
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 					tw.writeString(pk_enc, 0, pk_enc.length);
+Log.i(":::::::TRILEAD:::::::::AuthMan::pk_enc::",byteContentHex(pk_enc));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 				}
 
 				byte[] msg = tw.getBytes();
-
+Log.i(":::::::TRILEAD:::::::::AuthMan:MSG::",byteContentHex(msg));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 				byte[] ds = ECDSASHA2Verify.generateSignature(msg, pk);
 
+Log.i(":::::::TRILEAD:::::::::AuthMan:signature::",byteContentHex(ds));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","e");
 				byte[] ec_sig_enc = ECDSASHA2Verify.encodeSSHECDSASignature(ds, pk.getParams());
+Log.i(":::::::TRILEAD:::::::::AuthMan:enc_signature::",byteContentHex(ec_sig_enc));
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","");
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","");
+Log.i(":::::::TRILEAD:::::::::AuthMan:empty::","");
 
 				PacketUserauthRequestPublicKey ua = new PacketUserauthRequestPublicKey("ssh-connection", user,
 						algo, pk_enc, ec_sig_enc);

@@ -44,7 +44,7 @@ sshIt is licensed under the Apache License, Version 2.0
 
 ## Download
 
-[sshIt on Android Market](https://market.android.com/details?id=org.alpha-llc.sshit)
+[sshIt on Android Market](https://market.android.com/details?id=org.alphallc.sshit)
 
 ## Credits
 

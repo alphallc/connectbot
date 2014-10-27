@@ -193,7 +193,7 @@
 			android:defaultValue="true"
 			/>
 
-		<org.alpha-llc.sshit.util.VolumePreference
+		<org.alphallc.sshit.util.VolumePreference
 			android:key="bellVolume"
 			android:title="@string/pref_bell_volume_title"
 			/>

@@ -16,12 +16,12 @@
  limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="org.alpha-llc.sshit"
+	package="org.alphallc.sshit"
 	android:versionName="1.7.1-27"
 	android:versionCode="27"
 	android:installLocation="auto">
 
-	<uses-sdk android:targetSdkVersion="11" android:minSdkVersion="11" />
+	<uses-sdk android:targetSdkVersion="19" android:minSdkVersion="19" />
 
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.VIBRATE" />
@@ -84,11 +84,11 @@
 		<activity android:name=".ColorsActivity" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="com.lamerman.FileDialog" android:configChanges="keyboardHidden|orientation" />
 
-		<service android:name="org.alpha-llc.sshit.service.TerminalManager"
+		<service android:name="org.alphallc.sshit.service.TerminalManager"
 			android:configChanges="keyboardHidden|orientation"
 			android:description="@string/service_desc" />
 			
-		<service android:name="org.alpha-llc.sshit.service.AuthAgentService"
+		<service android:name="org.alphallc.sshit.service.AuthAgentService"
 			android:description="@string/auth_agent_service_desc"
 			android:permission="org.openintents.ssh.permission.ACCESS_SSH_AGENT">
 			<intent-filter>

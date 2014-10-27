@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
-import org.alpha-llc.sshit.R;
+import org.alphallc.sshit.R;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
