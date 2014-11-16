@@ -8,6 +8,8 @@ Copyright (c) 2014 ConnectBot Community (see commitlog)
 
 sshIt is open-source telnet and secure shell (SSH) client, based on ConnectBot and it's successors.
 
+!!! Warning: work on moving to another crypto backends is in progress. Client may become unusable in any moment.
+
 ## Features and enhancements
 
  - based on (VX and original) ConnectBot 1.7.1
@@ -44,7 +46,7 @@ sshIt is licensed under the Apache License, Version 2.0
 
 ## Download
 
-[sshIt on Android Market](https://market.android.com/details?id=org.alphallc.sshit)
+[sshIt on Android Market](https://market.android.com/details?id=org.alphallc.sshit) (alpha, so you need to join https://plus.google.com/communities/110104323370703606070 and sign up on testing: https://play.google.com/apps/testing/org.alphallc.sshit)
 
 ## Credits
 

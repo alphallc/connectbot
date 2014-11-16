@@ -23,7 +23,7 @@ public final class MAC
 
 	/* Higher Priority First */
 	private static final String[] MAC_LIST = {
-		"hmac-sha1-96", "hmac-sha1", "hmac-md5-96", "hmac-md5"
+		"hmac-sha2-512", "hmac-sha2-256", "hmac-ripemd160", "hmac-sha1-96", "hmac-sha1", "hmac-md5-96", "hmac-md5"
 	};
 
 	public final static String[] getMacList()

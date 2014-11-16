@@ -67,6 +67,13 @@ import com.trilead.ssh2.crypto.Base64;
 import com.trilead.ssh2.crypto.PEMDecoder;
 import com.trilead.ssh2.crypto.PEMStructure;
 
+import org.alphallc.extras.ByteOps;
+
+
+import java.security.interfaces.RSAPublicKey;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 /**
  * List public keys in database by nickname and describe their properties. Allow users to import,
  * generate, rename, and delete key pairs.
@@ -80,7 +87,7 @@ public class PubkeyListActivity extends ListActivity implements EventListener, F
 	public static final String PICK_MODE = "pickmode";
 	public static final String PICKED_PUBKEY_ID = "pubkey_id";
 
-	private static final int MAX_KEYFILE_SIZE = 8192;
+	private static final int MAX_KEYFILE_SIZE = 16384;
 	private static final int KEYTYPE_PUBLIC = 0;
 	private static final int KEYTYPE_PRIVATE = 1;
 
@@ -665,15 +672,38 @@ public class PubkeyListActivity extends ListActivity implements EventListener, F
 			if (imported) {
 				try {
 					PEMStructure struct = PEMDecoder.parsePEM(new String(pubkey.getPrivateKey()).toCharArray());
-					String type = (struct.pemType == PEMDecoder.PEM_RSA_PRIVATE_KEY) ? "RSA" : "DSA";
-					Log.e(TAG, "str.data.len: " + struct.data.length);
-					holder.caption.setText(String.format("%s unknown-bit", type));
+					String type = "";
+					String enc = "";
+					if (struct.pemType == PEMDecoder.PEM_RSA_PRIVATE_KEY) {type="RSA";}
+					if (struct.pemType == PEMDecoder.PEM_DSA_PRIVATE_KEY) {type="DSA";}
+					if (struct.pemType == PEMDecoder.PEM_EC_PRIVATE_KEY) {type="EC";}
+//					if (struct.pemType == PEMDecoder.PEM_ED_PRIVATE_KEY) {type="ED";}
+					if (PEMDecoder.isPEMEncrypted(struct)) { enc=" (encrypted)"; }
+
+
+
+					try {
+						byte[] oskp = PubkeyUtils.extractOpenSSHPublic(PubkeyUtils.recoverKeyPair(struct.data));
+						//RSAPublicKey ppk = (RSAPublicKey)PubkeyUtils.recoverKeyPair(struct.data).getPublic();
+					} catch (NoSuchAlgorithmException e) {
+						Log.e("________________", e.getMessage(), e);
+					} catch (InvalidKeySpecException e) {
+						Log.e("________________", e.getMessage(), e);
+					}
+
+//					Log.i("_____________PKLA________Pub_______", pubkey.getPublicKey().length+"");
+//					Log.i("_____________PKLA________PubC______", ByteOps.ContentHex(pubkey.getPublicKey()));
+////					Log.i("_____________PKLA________Priv______", pubkey.getPrivateKey().toString());
+////					Log.i("_____________PKLA________PrivC_____", ByteOps.ContentHex(pubkey.getPrivateKey()));
+
+					holder.caption.setText(PubkeyUtils.getPrivateKeyDescription(struct.data, type)+enc);
 				} catch (IOException e) {
 					Log.e(TAG, "Error decoding IMPORTED public key at " + pubkey.getId(), e);
 				}
 			} else {
 				try {
-					holder.caption.setText(pubkey.getDescription());
+//					holder.caption.setText(pubkey.getDescription());
+					holder.caption.setText(PubkeyUtils.getPublicKeyDescription(pubkey.getPublicKey(),pubkey.getType()));
 				} catch (Exception e) {
 					Log.e(TAG, "Error decoding public key at " + pubkey.getId(), e);
 					holder.caption.setText(R.string.pubkey_unknown_format);

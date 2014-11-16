@@ -63,6 +63,9 @@ import javax.crypto.spec.SecretKeySpec;
 import org.keyczar.jce.EcCore;
 
 import org.alphallc.sshit.bean.PubkeyBean;
+
+import org.alphallc.extras.ByteOps;
+
 import android.util.Log;
 
 import com.trilead.ssh2.crypto.Base64;
@@ -70,6 +73,9 @@ import com.trilead.ssh2.crypto.SimpleDERReader;
 import com.trilead.ssh2.signature.DSASHA1Verify;
 import com.trilead.ssh2.signature.ECDSASHA2Verify;
 import com.trilead.ssh2.signature.RSASHA1Verify;
+
+//	import java.security.Security;
+//	import java.security.Provider;
 
 public class PubkeyUtils {
 	private static final String TAG = "PubkeyUtils";
@@ -147,8 +153,25 @@ public class PubkeyUtils {
 	}
 
 	public static PrivateKey decodePrivate(byte[] encoded, String keyType) throws NoSuchAlgorithmException, InvalidKeySpecException {
+////		Log.i(":::::::::::::PRIVATE::::::::RAW:::::::", encoded.toString());
+////		Log.i(":::::::::::::PRIVATE::::::::KT:::::::", keyType);
+////		Log.i(":::::::::::::PRIVATE::::::::ENC::::::", ByteOps.ContentHex(encoded));
 		PKCS8EncodedKeySpec privKeySpec = new PKCS8EncodedKeySpec(encoded);
+////		Log.i(":::::::::::::PRIVATE:::::::KS_ENC::::", ByteOps.ContentHex(privKeySpec.getEncoded()));
+////		Log.i(":::::::::::::PRIVATE::::::::FMT::::::", privKeySpec.getFormat());
 		KeyFactory kf = KeyFactory.getInstance(keyType);
+
+/*
+		Provider[] provs = Security.getProviders();
+
+		for(int x=0;x<provs.length;x++){
+			Log.i("_____________PROVS_LOOP______getname____", String.valueOf(provs[x].getName()));
+			Log.i("_____________PROVS_LOOP______getvers____", String.valueOf(provs[x].getVersion()));
+			Log.i("_____________PROVS_LOOP______getinfo____", String.valueOf(provs[x].getInfo()));
+			Log.i("_____________PROVS_LOOP______classnm____", String.valueOf(provs[x].getClass().getName()));
+			Log.i("_____________PROVS_LOOP______tostring___", String.valueOf(provs[x].toString()));
+		}
+*/
 		return kf.generatePrivate(privKeySpec);
 	}
 
@@ -160,9 +183,70 @@ public class PubkeyUtils {
 	}
 
 	public static PublicKey decodePublic(byte[] encoded, String keyType) throws NoSuchAlgorithmException, InvalidKeySpecException {
+////		Log.i(":::::::::::::PUBLIC::::::::RAW:::::::", encoded.toString());
+////		Log.i(":::::::::::::PUBLIC::::::::KT:::::::", keyType);
+////		Log.i(":::::::::::::PUBLIC::::::::ENC::::::", ByteOps.ContentHex(encoded));
 		X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encoded);
+////		Log.i(":::::::::::::PUBLIC:::::::KS_ENC::::", ByteOps.ContentHex(pubKeySpec.getEncoded()));
+////		Log.i(":::::::::::::PUBLIC::::::::FMT::::::", pubKeySpec.getFormat());
 		KeyFactory kf = KeyFactory.getInstance(keyType);
 		return kf.generatePublic(pubKeySpec);
+	}
+
+	public static int getPublicKeyLength(byte[] encoded, String keyType) {
+		int bits = 0;
+		try {
+			final PublicKey pubKey = decodePublic(encoded, keyType);
+			if (PubkeyDatabase.KEY_TYPE_RSA.equals(keyType)) {
+				bits = ((RSAPublicKey) pubKey).getModulus().bitLength();
+			} else if (PubkeyDatabase.KEY_TYPE_DSA.equals(keyType)) {
+				bits = 1024;
+			} else if (PubkeyDatabase.KEY_TYPE_EC.equals(keyType)) {
+				bits = ((ECPublicKey) pubKey).getParams().getCurve().getField().getFieldSize();
+			} else if (PubkeyDatabase.KEY_TYPE_ED.equals(keyType)) {
+				bits = 0; // TODO: !!!
+			} else {
+				Log.e(TAG, "Unknown key type! (pku182)");
+			}
+		} catch (NoSuchAlgorithmException e) {
+			Log.e(TAG, "Unknown key type! (pku185)", e);
+		} catch (InvalidKeySpecException e) {
+			Log.e(TAG, "Unknown key type! (pku187)", e);
+		}
+		return bits;
+	}
+
+	public static int getPrivateKeyLength(byte[] encoded, String keyType) {
+		int bits = 0;
+		try {
+			final PrivateKey privKey = decodePrivate(encoded, keyType);
+			if (PubkeyDatabase.KEY_TYPE_RSA.equals(keyType)) {
+				bits = ((RSAPrivateKey) privKey).getModulus().bitLength();
+			} else if (PubkeyDatabase.KEY_TYPE_DSA.equals(keyType)) {
+				bits = 1024;
+			} else if (PubkeyDatabase.KEY_TYPE_EC.equals(keyType)) {
+				bits = ((ECPrivateKey) privKey).getParams().getCurve().getField().getFieldSize();
+			} else if (PubkeyDatabase.KEY_TYPE_ED.equals(keyType)) {
+				bits = 0; // TODO: !!!
+			} else {
+				Log.e(TAG, "Unknown key type! (pku205)");
+			}
+		} catch (NoSuchAlgorithmException e) {
+			Log.e(TAG, "Unknown key type! (pku221)", e);
+		} catch (InvalidKeySpecException e) {
+			Log.e(TAG, "Unknown key type! (pku223)", e);
+		}
+		return bits;
+	}
+
+	public static String getPublicKeyDescription(byte[] encoded, String keyType) {
+		String desc = keyType+" "+getPublicKeyLength(encoded,keyType)+"-bit";
+		return desc;
+	}
+
+	public static String getPrivateKeyDescription(byte[] encoded, String keyType) {
+		String desc = keyType+" "+getPrivateKeyLength(encoded,keyType)+"-bit";
+		return desc;
 	}
 
 	static String getAlgorithmForOid(String oid) throws NoSuchAlgorithmException {

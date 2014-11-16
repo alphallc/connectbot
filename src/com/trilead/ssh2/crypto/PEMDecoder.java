@@ -31,6 +31,8 @@ import com.trilead.ssh2.crypto.cipher.DES;
 import com.trilead.ssh2.crypto.cipher.DESede;
 import com.trilead.ssh2.signature.ECDSASHA2Verify;
 
+import android.util.Log;
+
 /**
  * PEM Support.
  * 
@@ -406,6 +408,7 @@ public class PEMDecoder
 				throw new IOException("Wrong version (" + version + ") in RSA PRIVATE KEY DER stream.");
 
 			BigInteger n = dr.readInt();
+								Log.i("::::::::KEYSIZE:::pemdec::", "Probably: " + n);
 			BigInteger e = dr.readInt();
 			BigInteger d = dr.readInt();
 			// TODO: is this right?

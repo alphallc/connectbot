@@ -24,19 +24,16 @@ import java.security.spec.KeySpec;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.trilead.ssh2.log.Logger;
 import com.trilead.ssh2.packets.TypesReader;
 import com.trilead.ssh2.packets.TypesWriter;
 
-import android.util.Log;
+import org.alphallc.extras.ByteOps;
 
 /**
  * @author Kenny Root
  *
  */
 public class ECDSASHA2Verify {
-	private static final Logger log = Logger.getLogger(ECDSASHA2Verify.class);
-
 	public static final String ECDSA_SHA2_PREFIX = "ecdsa-sha2-";
 
 	private static final String NISTP256 = "nistp256";
@@ -269,91 +266,37 @@ public class ECDSASHA2Verify {
 		}
 	}
 
-public static String byteContentDec(byte[] b)
-{
-	int value = 0;
-	String str = "";
-
-	for(int i=0; i<b.length; i++) {
-		value = 0;
-		value = (value << 8) | b[i];
-		str = str.concat(value+"").concat(" ");
-	}
-
-    return str;
-}
-public static String byteContentHex(byte[] b)
-{
-	String str = "";
-	int v = 0;
-
-	for(int i=0; i<b.length; i++) {
-		v = b[i];
-
-		if (b[i] < 0) {
-			v = v + 255;
-		}
-
-		str = str.concat(Integer.toHexString(0x100 | v).substring(1).toUpperCase()).concat(" ");
-	}
-
-    return str;
-}
-
 	public static byte[] encodeSSHECDSASignature(byte[] sig, ECParameterSpec params) throws IOException
 	{
 		TypesWriter tw = new TypesWriter();
 
 		String curveName = getCurveName(params);
 		tw.writeString(ECDSA_SHA2_PREFIX + curveName);
-/*
-		Log.i(":::::::TRILEAD:::::::::0d0:::",byteContentDec(sig));
-		Log.i(":::::::TRILEAD:::::::::0x0:::",byteContentHex(sig));
-		Log.i(":::::::TRILEAD:::::::::.len",sig.length+"");
-		Log.i(":::::::TRILEAD:::::::::.len-2",(sig.length - 2 )+"");
-		Log.i(":::::::TRILEAD:::::::::.sig[0d]",byteContentDec((new byte[] {sig[0]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[0x]",byteContentHex((new byte[] {sig[0]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[1d]",byteContentDec((new byte[] {sig[1]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[1x]",byteContentHex((new byte[] {sig[1]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[2d]",byteContentDec((new byte[] {sig[2]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[2x]",byteContentHex((new byte[] {sig[2]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[3d]",byteContentDec((new byte[] {sig[3]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[3x]",byteContentHex((new byte[] {sig[3]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[4d]",byteContentDec((new byte[] {sig[4]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[4x]",byteContentHex((new byte[] {sig[4]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[5d]",byteContentDec((new byte[] {sig[5]})));
-		Log.i(":::::::TRILEAD:::::::::.sig[5x]",byteContentHex((new byte[] {sig[5]})));
-*/
+
 		// ECDSA-521 workaround start //
-		int sig_field_pad = 0;
 		int sig1 = sig[1];
 
-		if (sig[1] == -127) {
-			// Then it's 521bit curve;
-			sig_field_pad = 1;
-			sig1 = sig[2]+0xFF+2;
+		if ((sig[1] & 0xFF) == 129) {
+			// Then it's 521bit curve...
+			// TODO: check WHY THE HELL it is 129 here, and why it shifted
+			// all the array?
+			sig = ByteOps.Remove(sig,1);
+			sig1 = sig[1] & 0xFF;
 		}
 		// ECDSA-521 workaround end //
 
-		if (sig[0] != 0x30) {
-			throw new IOException("Invalid signature format");
-		}
-		if (sig1 != sig.length - 2) {
-		Log.e(":::::::TRILEAD:::::::::.LENCHECK",sig1+" != "+(sig.length - 2));
-			throw new IOException("Invalid signature format");
-		}
-		if (sig[2+sig_field_pad] != 0x02) {
-			throw new IOException("Invalid signature format");
+		if ((sig[0] != 0x30) || (sig1 != sig.length - 2) || (sig[2] != 0x02)) {
+			throw new IOException("Invalid signature header");
 		}
 
-		int rLength = sig[3+sig_field_pad]; // ?
-		if ((rLength + 6 > sig.length) || (sig[4 + sig_field_pad + rLength] != 0x02)) {
-			throw new IOException("Invalid signature format");
+		int rLength = sig[3];
+		if ((rLength + 6 > sig.length) || (sig[4 + rLength] != 0x02)) {
+			throw new IOException("Invalid/broken signature (length fields are broken)");
 		}
 
-		int sLength = sig[5 + sig_field_pad + rLength];
+		int sLength = sig[5 + rLength];
 		if (6 + rLength + sLength > sig.length) {
-			throw new IOException("Invalid signature format");
+			throw new IOException("Length checksum is incorrect");
 		}
 
 		byte[] rArray = new byte[rLength];
